@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ye9-tF-XW5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Egf-dT-76P">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,44 +10,32 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="kY4-AQ-60w">
+        <scene sceneID="Tkk-5d-Lx3">
             <objects>
-                <viewController id="ye9-tF-XW5" sceneMemberID="viewController">
+                <viewController id="Egf-dT-76P" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ibl-xT-Pjs"/>
-                        <viewControllerLayoutGuide type="bottom" id="SFE-C5-Aw4"/>
+                        <viewControllerLayoutGuide type="top" id="Ezf-AO-G2m"/>
+                        <viewControllerLayoutGuide type="bottom" id="E2P-hF-cO9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ns3-3w-CTQ">
+                    <view key="view" contentMode="scaleToFill" id="UpH-CY-goR">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Toxote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="384-gh-W5L">
-                                <rect key="frame" x="167" y="100" width="332" height="123"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0N-CC-DUB">
+                                <rect key="frame" x="318" y="172" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="100"/>
-                                <color key="textColor" red="0.98447930269999995" green="1" blue="0.98869567629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.44340945512820518" green="0.44340945512820518" blue="0.44340945512820518" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="8" height="3"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8u-Dv-67e">
-                                <rect key="frame" x="266" y="231" width="135" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleColor" red="0.98447930269999995" green="1" blue="0.98869567629999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="Play"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="f2s-ur-r2D"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="cD3-zQ-VWc"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.79152644230769231" green="0.16893523981124278" blue="0.20601083805228665" alpha="0.79070581896551728" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C6X-Ng-xKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFG-bE-Wd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-760.56971514242889" y="36"/>
+            <point key="canvasLocation" x="-706" y="81"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -61,13 +49,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zy-uj-ZfR">
-                                <rect key="frame" x="617" y="20" width="30" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU5-jb-chb">
+                                <rect key="frame" x="601" y="20" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="x"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="ye9-tF-XW5" kind="show" id="PZk-UQ-1E8"/>
+                                    <segue destination="Egf-dT-76P" kind="show" id="LJ1-Ti-JPa"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -1,4 +1,36 @@
 //
+//  GameplayScene.swift
+//  Test
+//
+//  Created by Dalton Danis on 2017-02-16.
+//  Copyright © 2017 Dalton Danis. All rights reserved.
+//
+
+/*
+import SpriteKit
+
+class GameScene: SKScene {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if atPoint(location).name == "Back" {
+                if let scene = StartScene(fileNamed: "StartScene") {
+                    scene.scaleMode = .aspectFill
+                    view!.presentScene(scene, transition: SKTransition.fade(with: UIColor.black, duration: 0.2))
+                }
+            }
+        }
+    }
+    
+    override func didMove(to view: SKView) {
+        
+    }
+}
+ */
+
+//
 //  GameScene.swift
 //  SpriteKitSimpleGame
 //
@@ -8,49 +40,12 @@
 
 import SpriteKit
 
-func + (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x + right.x, y: left.y + right.y)
-}
-
-func - (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint(x: left.x - right.x, y: left.y - right.y)
-}
-
-func * (point: CGPoint, scalar: CGFloat) -> CGPoint {
-    return CGPoint(x: point.x * scalar, y: point.y * scalar)
-}
-
-func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
-    return CGPoint(x: point.x / scalar, y: point.y / scalar)
-}
-
-#if !(arch(x86_64) || arch(arm64))
-    func sqrt(a: CGFloat) -> CGFloat {
-        return CGFloat(sqrtf(Float(a)))
-    }
-#endif
-
-extension CGPoint {
-    func length() -> CGFloat {
-        return sqrt(x*x + y*y)
-    }
-    
-    func normalized() -> CGPoint {
-        return self / length()
-    }
-}
-
-
-struct PhysicsCategory {
-    static let None      : UInt32 = 0
-    static let All       : UInt32 = UInt32.max
-    static let Monster   : UInt32 = 0b1       // 1
-    static let Projectile: UInt32 = 0b10      // 2
-}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 1
+    //let balanceX = 266.8
+    //let balanceY = 187.5
     let player = SKSpriteNode(imageNamed: "player")
     var monstersDestroyed = 0
     
@@ -59,7 +54,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 2fz
         backgroundColor = SKColor.white
         // 3
-        player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
+
+        
+        player.position = CGPoint(x: (size.width * 0.1) - (size.width / 2), y: (size.height * 0.5) - (size.height / 2))
+        //player.position = CGPoint(x: size.width * -0.5, y: 0)
+        print("NEW:")
+        print(size.width * -0.5)
+        print("0")
+        print(":")
+        print(size.width * 0.1)
+        print(size.height * 0.5)
+        print(":NORMAL")
+        print(size.width)
+        print(size.height)
+        print(":CENTER")
+        print(size.width/2)
+        print(size.height/2)
+        
         // 4
         addChild(player)
         
@@ -104,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Position the monster slightly off-screen along the right edge,
         // and along a random position along the Y axis as calculated above
-        monster.position = CGPoint(x: size.width + monster.size.width/2, y: actualY)
+        monster.position = CGPoint(x: (size.width + monster.size.width/2) - (size.width / 2), y: (actualY) - (size.height / 2))
         
         // Add the monster to the scene
         addChild(monster)
@@ -113,7 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actualDuration = random(min: CGFloat(2.0), max: CGFloat(4.0))
         
         // Create the actions
-        let actionMove = SKAction.move(to: CGPoint(x: -monster.size.width/2, y: actualY), duration: TimeInterval(actualDuration))
+        let actionMove = SKAction.move(to: CGPoint(x: (-monster.size.width/2) - (size.width / 2), y: (actualY) - (size.height / 2)), duration: TimeInterval(actualDuration))
         let actionMoveDone = SKAction.removeFromParent()
         
         let loseAction = SKAction.run() {
@@ -125,6 +136,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //Added for X button
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if atPoint(location).name == "Back" {
+                if let scene = StartScene(fileNamed: "StartScene") {
+                    scene.scaleMode = .aspectFill
+                    view!.presentScene(scene, transition: SKTransition.fade(with: UIColor.black, duration: 0.2))
+                }
+            }
+        }
+    }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -212,3 +236,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
 }
+
