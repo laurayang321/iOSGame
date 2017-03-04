@@ -20,6 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let player = SKSpriteNode(imageNamed: "player")
     var projectile: SKSpriteNode!
+    //var projectile: SKSpriteNode = childNode(withName: "projectile") as! SKSpriteNode
+    //projectile = SKSpriteNode(imageNamed: "projectile")
+    
+
+    
 //============= Label Declarations =============
     var waveLabel = getWave()
     var healthLabel = getHealth()
@@ -171,6 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let purple = SKSpriteNode(texture: temp)
         
         purple.size = CGSize(width: 80, height: 80)
+        purple.name = "purple"
         
         purple.physicsBody = SKPhysicsBody(rectangleOf: purple.size)
         purple.physicsBody?.isDynamic = false
@@ -193,12 +199,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actualDuration = random(min: CGFloat(4.0), max: CGFloat(10.0))
         
         // move purple along screen from right to left by half of its width
+        // use actualDuration to specify the monster's moving speed
         let actionMove = SKAction.move(to: CGPoint(x: -(self.frame.size.width+purple.size.width/2), y: actualY), duration: TimeInterval(actualDuration))
         
         let actionMoveDone = SKAction.removeFromParent()
 
         let loseAction = SKAction.run() {
             
+            print("enter loseAction\n")
+            //print("remove purple from parent - off screen\n")
             // Laura's change: update lives icon in loseAction
             switch(self.health) {
             case 6:
@@ -220,22 +229,75 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.livesArray[2].texture = SKTexture(imageNamed: "heartEmpty")
                 break;
             default :
-                print("hello default")
-                
+                print("lose action")
             }
             
             self.health -= 1
             // Laura's change end
             
+//            self.health -= 1
             self.healthLabel.text = "Health: \(self.health)"
-            if (self.health <  1) {
+            if (self.health < 1) {
                 let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
                 let gameOverScene = GameOverScene(size: self.size, won: false)
                 self.view?.presentScene(gameOverScene, transition: reveal)
             }
         }
         
+//        let check = SKAction.run(){
+//            if(purple.position.x < -self.size.width/2-purple.size.width){
+//                
+//                print("remove purple from parent - off screen\n")
+//                //Laura's change: update lives icon in loseAction
+//                switch(self.health) {
+//                case 6:
+//                    self.livesArray[0].texture = SKTexture(imageNamed: "heartHalf")
+//                    break;
+//                case 5:
+//                    self.livesArray[0].texture = SKTexture(imageNamed: "heartEmpty")
+//                    break;
+//                case 4:
+//                    self.livesArray[1].texture = SKTexture(imageNamed: "heartHalf")
+//                    break;
+//                case 3:
+//                    self.livesArray[1].texture = SKTexture(imageNamed: "heartEmpty")
+//                    break;
+//                case 2:
+//                    self.livesArray[2].texture = SKTexture(imageNamed: "heartHalf")
+//                    break;
+//                case 1:
+//                    self.livesArray[2].texture = SKTexture(imageNamed: "heartEmpty")
+//                    break;
+//                default :
+//                    print("lose action")
+//                }
+//                
+//                self.health -= 1
+//                self.healthLabel.text = "Health: \(self.health)"
+//                
+//                if (self.health < 1) {
+//                    let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//                    let gameOverScene = GameOverScene(size: self.size, won: false)
+//                    self.view?.presentScene(gameOverScene, transition: reveal)
+//                }
+//                
+//                purple.removeFromParent()
+//            }
+//        }
+        
+        
+//        let checkOffScreenForever = SKAction.repeatForever(check)
+//        let group = SKAction.group([actionMove, checkOffScreenForever])
+//        purple.run(group)
+
+        
+        //let group = SKAction.group([actionMove, actionLose])
+        //purple.run(group)
+
         purple.run(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
+        
+        //let move = SKAction.sequence([actionMove, loseAction, actionMoveDone])
+        
     }
     
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
@@ -340,12 +402,72 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 count += 1
             }
         }
+        
+        // Loop over all nodes in the scene
+        self.enumerateChildNodes(withName: "*") {
+            node, stop in
+            if (node is SKSpriteNode) {
+                let sprite = node as! SKSpriteNode
+                
+                // remove the off screen projectiles from the scene
+                if(node.name == "projectile"){
+                    // print("projectile" + "\n")
+                    
+                    // Check if the projectile is off scene
+                    if (sprite.position.x < -self.size.width*0.5 || sprite.position.x > self.size.width*0.5+sprite.size.width/2.0
+                        || sprite.position.y < -self.size.height/2.0 || sprite.position.y > self.size.height/2.0+sprite.size.height/2.0) {
+                        sprite.removeFromParent()
+                    }
+                }
+                
+//                if(node.name == "purple"){
+//                    // Check if the purple monster is off scene
+//                    if (sprite.position.x < (-self.size.width*0.5-sprite.size.width) ){
+//                        
+//                        print("remove purple from parent - off screen\n")
+//                        //Laura's change: update lives icon in loseAction
+//                        switch(self.health) {
+//                        case 6:
+//                            self.livesArray[0].texture = SKTexture(imageNamed: "heartHalf")
+//                            break;
+//                        case 5:
+//                            self.livesArray[0].texture = SKTexture(imageNamed: "heartEmpty")
+//                            break;
+//                        case 4:
+//                            self.livesArray[1].texture = SKTexture(imageNamed: "heartHalf")
+//                            break;
+//                        case 3:
+//                            self.livesArray[1].texture = SKTexture(imageNamed: "heartEmpty")
+//                            break;
+//                        case 2:
+//                            self.livesArray[2].texture = SKTexture(imageNamed: "heartHalf")
+//                            break;
+//                        case 1:
+//                            self.livesArray[2].texture = SKTexture(imageNamed: "heartEmpty")
+//                            break;
+//                        default :
+//                            print("lose action")
+//                        }
+//                        
+//                        self.health -= 1
+//                        self.healthLabel.text = "Health: \(self.health)"
+//                        
+//                        sprite.removeFromParent()
+//                        // Laura's change end
+//                    }
+//                
+//                }
+                
+            }
+        }
     }
+    
 //============= END of Touch Declarations =============
 
 //============= Ball Declarations =============
     func setupBall(){
         projectile = SKSpriteNode(imageNamed: "projectile")
+        projectile.name = "projectile"
         
         projectile.position = player.position
         projectile.physicsBody?.isDynamic = false // 2
